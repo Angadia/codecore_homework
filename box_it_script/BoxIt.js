@@ -53,18 +53,3 @@ const boxIt = (arrayStrings) => {
 };
 
 console.log(boxIt(process.argv.slice(2)));
-
-
-// console.log(drawLine(10));
-// console.log(drawTopBorder(-1));
-// console.log(drawTopBorder(3));
-// console.log(drawBottomBorder(-1));
-// console.log(drawBottomBorder(3));
-// console.log(drawMiddleBorder(-1));
-// console.log(drawMiddleBorder(3));
-// console.log(drawBarsAround("My name is Dan"));
-// console.log(drawBarsAround("You are Jane  "));
-// console.log(drawBarsAround("  You are Bill"));
-// console.log(boxIt(['Jon Snow', 'Cersei Lannister']));
-// console.log(boxIt(['', 'Cersei Lannister']));
-// console.log(boxIt([' ']));
