@@ -1,0 +1,17 @@
+{
+  "name": "box_it_script",
+  "version": "1.0.0",
+  "description": "Draw box around each string inputs.",
+  "main": "BoxIt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "BoxItScript"
+  ],
+  "author": "Jignesh Patel",
+  "license": "ISC",
+  "bin": {
+    "BoxIt": "./BoxIt.js"
+  }
+}
