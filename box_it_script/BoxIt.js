@@ -69,7 +69,7 @@ const boxIt = (arrayStringArrays) => {
         const elementArray = arrayStringArrays[index];
         for (let strIndex = 0; strIndex < elementArray.length; strIndex++) {
             if (arrayStringArrays[0].length < elementArray.length) {
-                return 'Please provide the CSV file in the required format.';
+                return 'Please provide a CSV file in the required format.';
             };
             if (index === 0) {
                 maxLengths.push(0);
@@ -91,7 +91,6 @@ const boxIt = (arrayStringArrays) => {
             tmpArrayStrings.push(element.padEnd(maxLengths[strIndex]));
         };
         paddedString = paddedString.concat(drawBarsAround(tmpArrayStrings)).concat('\n');
-        tmpArrayStrings = [];
         if (index < arrayStringArrays.length-1) {
             paddedString = paddedString.concat(drawMiddleBorder(maxLengths)).concat('\n');
         };
