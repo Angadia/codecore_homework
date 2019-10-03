@@ -40,6 +40,27 @@ class Turtle {
             console.log(row);
         };
     };
+    print(outputFilename) {
+        let fs = require('fs');
+        let data = '';
+        let lowestX = this.pointsVisited.map(el => el).reduce(((min,cur) => Math.min(min, cur[0])), 0);
+        let lowestY = this.pointsVisited.map(el => el).reduce(((min,cur) => Math.min(min, cur[1])), 0);
+        let highestX = this.pointsVisited.map(el => el).reduce(((max,cur) => Math.max(max, cur[0])), 0);
+        let highestY = this.pointsVisited.map(el => el).reduce(((max,cur) => Math.max(max, cur[1])), 0);
+        for (let y = lowestY, row = ''; y <= highestY; y++, row='') {
+            for (let x = lowestX, status = ' '; x <= highestX; x++, status=' ') {
+                this.pointsVisited.forEach(point => {
+                    if (point[0] == x && point[1] == y) status = '+';
+                });
+                row += status;
+            };
+            data += (row+'\n');
+        };
+        fs.writeFile(outputFilename, data, (err) => {
+            if (err) throw err;
+            console.log(`Drawing written to ${outputFilename}`);
+        });
+    };
 };
 
 function processTurtleCmds (cmds, turtle) {
@@ -58,15 +79,19 @@ function processTurtleCmds (cmds, turtle) {
     });
 };
 
-if (process.argv.length < 4) {
-    let cmds = process.argv[2].split('-');
-    let flash;
+if (process.argv.length < 5) {
+    let cmds = [], inputs = process.argv.slice(2);
+    let flash, outputFilename = '';
+    if (inputs.length == 2 && inputs[0].startsWith('--output=')) {
+        outputFilename = inputs.shift().slice(9);
+    };
+    cmds = inputs.shift().split('-');
     if (cmds.length == 0) {
         flash = new Turtle(0, 0);
     } else if (!cmds[0].startsWith('t')) {
         flash = new Turtle(0, 0);
     } else {
-        cmd = cmds.shift();
+        let cmd = cmds.shift();
         point = cmd.slice(1).split(',');
         if (point.length != 2 || !parseInt(point[0]) || !parseInt(point[1])) {
             console.log('Please provide commands in required format.');
@@ -76,5 +101,9 @@ if (process.argv.length < 4) {
         };
     };
     processTurtleCmds(cmds, flash);
-    flash.print();
+    if (outputFilename == '') {
+        flash.print()
+    } else {
+        flash.print(outputFilename);
+    };
 };
