@@ -1,7 +1,7 @@
 const readline = require('readline');
 const rl = readline.createInterface({input: process.stdin, output: process.stdout});
 
-const todoList = [{"completed":false, "title":"First entry."},{"completed":true, "title":"Second entry."}];
+const todoList = [];
 
 console.log("\nWelcome to Todo CLI!");
 console.log("--------------------");
