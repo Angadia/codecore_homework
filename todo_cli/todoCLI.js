@@ -1,3 +1,4 @@
+const fs = require('fs');
 const readline = require('readline');
 const rl = readline.createInterface({input: process.stdin, output: process.stdout});
 
@@ -73,4 +74,16 @@ function todoMenu() {
     });
 };
 
+function loadTodoFile(fileName) {
+    fs.readFile(fileName, (err, data) => {
+        if (err) throw err;
+        JSON.parse(data.toString()).forEach(todoEntry => {
+            todoList.push(todoEntry);
+        });
+    });
+};
+
+if (process.argv.length == 3) {
+    loadTodoFile(process.argv[2]);
+};
 todoMenu();
