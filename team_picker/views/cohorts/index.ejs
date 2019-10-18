@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <title>Super Team Picker</title>
+</head>
+
+<body>
+<%- include("../partials/header") %>
+  <main class="main">
+  <%
+  if (cohorts && cohorts.length > 0) {
+  %>
+    <cohorts class="cohorts">
+  <%
+    cohorts.forEach(cohort => {
+  %>
+    <article class="cohort">
+      <cohort class="cohort_details">
+        <div class="cohort_title">
+          <img src="<%= cohort.logo_url %>" alt="<%= cohort.logo_url %>" class="cohort_logo_url">
+          <h4 class="cohort_name"><%= cohort.name %></h4>
+        </div>
+        <div class="cohort_content">
+          <p class="cohort_members"><%= cohort.members %></p>
+        </div>
+        <a href="/cohorts/<%= cohort.id %>"><button type="button">Show cohort</button></a>
+      </cohort>
+    </article>
+  <%
+    });
+  %>
+    </cohorts>
+  <%
+  } else {
+  %>
+  <div class="no_cohort_message">
+    <h4>Sorry, no cohort to list. Please create a new Cohort.</h4>
+  </div>
+  <%
+  };
+  %>
+  </main>
+</body>
+
+</html>

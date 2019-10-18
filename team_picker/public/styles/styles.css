@@ -1,0 +1,162 @@
+@import url("reset.css");
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+/*** header and navigation menu ***/
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.branding {
+  width: 40%;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.branding label {
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+.nav {
+  width: 60%;
+  padding: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu a {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-left: 0.5em;
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+/*** Cohorts all around ***/
+
+.main {
+  padding: 0.5em;
+}
+
+.no_cohort_message {
+  padding: 0.5em;
+}
+
+.cohorts {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cohort {
+  padding: 0.5em;
+}
+
+.cohort_details {
+  padding: 1em;
+  border: 1px groove lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cohort_title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.cohort_name {
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+.cohort_logo_url {
+  max-width: 24px;
+  max-height: 24px;
+  margin-right: 0.5em;
+}
+
+.cohort_content {
+  width: 100%;
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cohort_details button {
+  padding: 0.25em;
+  margin-top: 0.5em;
+}
+
+.cohort_submit {
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.cohort_submit input, button {
+  padding: 0.25em;
+  margin-right: 1em;
+}
+
+
+/*** Cohort form ***/
+
+.cohort_form {
+  width: 100%;
+  padding: 0.5em;
+}
+
+.cohort_form_logo_url_text,
+.cohort_form_name_text,
+.cohort_form_members_text {
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.cohort_form_name,
+.cohort_form_members {
+  padding-top: 0.5em;
+}
+
+.cohort_form_submit {
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.cohort_form_submit_btn {
+  width: 15%;
+}
