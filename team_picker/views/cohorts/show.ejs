@@ -1,84 +1,84 @@
 <!doctype html>
-<html>
+<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/styles/styles.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/assets/favicon.png">
-  <title>Super Team Picker</title>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width", initial-scale=1 shrink-to-fit=no>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <title>Super Team Picker</title>
+  </head>
 
-<body>
+  <body>
 <%- include("../partials/header") %>
-  <main class="main">
-  <% if (cohort) { %>
-    <article class="cohort">
-      <cohort class="cohort_details">
-        <div class="cohort_title">
-          <h4 class="cohort_name"><%= cohort.name %></h4>
-        </div>
-        <div class="cohort_content">
-          <p class="cohort_members"><%= cohort.members %></p>
-        </div>
-        <div class="cohort_submit">
-          <form action="/cohorts/<%= cohort.id %>/edit" method="GET">
-            <input type="submit" value="Edit cohort" class="cohort_edit_btn">
-          </form>
-          <form action="/cohorts/<%= cohort.id %>" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete cohort" class="cohort_delete_btn">
-          </form>
-        </div>
-      <% if (cohort.members.length > 0) { %>
-        <div class="assign_teams">
-          <form action="/cohorts/<%= cohort.id %>" method="GET">
-            <div class="assign_teams_method">
-              <label>Method</label>
-              <ul class="assign_teams_method_choices">
-                <li><input type="radio" name="method" value="team_count"
-                <% if (method && method == "team_count") { %> checked="true"<% }; %>
-                >Team Count</li>
-                <li><input type="radio" name="method" value="number_per_team"
-                <% if (method && method == "number_per_team") { %> checked="true"<% }; %>
-                >Number Per Team</li>
-              </ul>
-            </div>
-            <div class="assign_teams_quantity">
-              <label>Quantity</label>
-              <input type="text" name="quantity" class="assign_teams_quantity_text"
-              <% if (quantity) { %> value="<%= quantity %>"<% }; %>>
-            </div>
-            <div class="assign_teams_submit">
-              <input type="submit" value="Assign Teams" class="assign_teams_btn">
-            </div>
-          </form>
-          <% if (teams && teams.length > 0) { %>
-          <div class="teams">
-            <table class="teams_table">
-              <tr>
-                <th>#</th>
-                <th>Members</th>
-              </tr>
-              <% for (let i = 0; i < teams.length; i++) { %>
-              <tr>
-                <td><%= i+1 %></td>
-                <td><%= teams[i] %></td>
-              </tr>            
-              <% }; %>
-            </table>
+    <main class="main">
+    <% if (cohort) { %>
+      <article class="cohort">
+        <cohort class="cohort_details">
+          <div class="cohort_title">
+            <h4 class="cohort_name"><%= cohort.name %></h4>
           </div>
-          <% }; %>
-        </div>
-      <% }; %>
-      </cohort>
-    </article>
-  <% } else { %>
-  <div class="no_cohort_message">
-    <h4>Sorry, cohort <%= id %> not found.</h4>
-  </div>
-  <% }; %>
-  </main>
-</body>
+          <div class="cohort_content">
+            <p class="cohort_members"><%= cohort.members %></p>
+          </div>
+          <div class="cohort_submit">
+            <form action="/cohorts/<%= cohort.id %>/edit" method="GET">
+              <input type="submit" value="Edit cohort" class="cohort_edit_btn">
+            </form>
+            <form action="/cohorts/<%= cohort.id %>" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="submit" value="Delete cohort" class="cohort_delete_btn">
+            </form>
+          </div>
+        <% if (cohort.members.length > 0) { %>
+          <div class="assign_teams">
+            <form action="/cohorts/<%= cohort.id %>" method="GET">
+              <div class="assign_teams_method">
+                <label>Method</label>
+                <ul class="assign_teams_method_choices">
+                  <li><input type="radio" name="method" value="team_count"
+                  <% if (method && method == "team_count") { %> checked="true"<% }; %>
+                  >Team Count</li>
+                  <li><input type="radio" name="method" value="number_per_team"
+                  <% if (method && method == "number_per_team") { %> checked="true"<% }; %>
+                  >Number Per Team</li>
+                </ul>
+              </div>
+              <div class="assign_teams_quantity">
+                <label>Quantity</label>
+                <input type="text" name="quantity" class="assign_teams_quantity_text"
+                <% if (quantity) { %> value="<%= quantity %>"<% }; %>>
+              </div>
+              <div class="assign_teams_submit">
+                <input type="submit" value="Assign Teams" class="assign_teams_btn">
+              </div>
+            </form>
+            <% if (teams && teams.length > 0) { %>
+            <div class="teams">
+              <table class="teams_table">
+                <tr>
+                  <th>#</th>
+                  <th>Members</th>
+                </tr>
+                <% for (let i = 0; i < teams.length; i++) { %>
+                <tr>
+                  <td><%= i+1 %></td>
+                  <td><%= teams[i] %></td>
+                </tr>            
+                <% }; %>
+              </table>
+            </div>
+            <% }; %>
+          </div>
+        <% }; %>
+        </cohort>
+      </article>
+    <% } else { %>
+    <div class="no_cohort_message">
+      <h4>Sorry, cohort <%= id %> not found.</h4>
+    </div>
+    <% }; %>
+    </main>
+  </body>
 
 </html>

@@ -1,49 +1,49 @@
 <!doctype html>
-<html>
+<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/styles/styles.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/assets/favicon.png">
-  <title>Super Team Picker</title>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width", initial-scale=1 shrink-to-fit=no>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <title>Super Team Picker</title>
+  </head>
 
-<body>
+  <body>
 <%- include("../partials/header") %> 
-  <main class="main">
-  <% if (cohort) { %>
-    <article class="cohort">
-      <div class="cohort_form">
-        <form action="/cohorts/<%= cohort.id %>" method="POST">
-        <input type="hidden" name="_method" value="PATCH">
-          <div class="cohort_form_logo_url">
-            <label for="logo_url">Logo Url</label>
-            <input type="text" name="logo_url" placeholder="e.g. https://www.example.com/some.png"
-              class="cohort_form_logo_url_text" value="<%= cohort.logo_url %>">
-          </div>
-          <div class="cohort_form_name">
-            <label for="name">Name</label>
-            <input type="text" name="name" placeholder="Flying Funks"
-              class="cohort_form_name_text" value="<%= cohort.name %>">
-          </div>
-          <div class="cohort_form_members">
-            <label for="members">Members</label>
-            <textarea name="members" placeholder="Jon Snow,Daenerys,Melisandre,Arya Stark" 
-              class="cohort_form_members_text"><%= cohort.members %></textarea>
-          </div>
-          <div class="cohort_form_submit">
-            <input type="submit" value="Submit" class="cohort_form_submit_btn">
-          </div>
-        </form>
-      </div>
-    </article>
-  <% } else { %>
-  <div class="no_cohort_message">
-    <h4>Sorry, cohort <%= id %> not found.</h4>
-  </div>
-  <% }; %>
-  </main>
-</body>
+    <main class="main">
+    <% if (cohort) { %>
+      <article class="cohort">
+        <div class="cohort_form">
+          <form action="/cohorts/<%= cohort.id %>" method="POST">
+          <input type="hidden" name="_method" value="PATCH">
+            <div class="cohort_form_logo_url">
+              <label for="logo_url">Logo Url</label>
+              <input type="text" name="logo_url" placeholder="e.g. https://www.example.com/some.png"
+                class="cohort_form_logo_url_text" value="<%= cohort.logo_url %>">
+            </div>
+            <div class="cohort_form_name">
+              <label for="name">Name</label>
+              <input type="text" name="name" placeholder="Flying Funks"
+                class="cohort_form_name_text" value="<%= cohort.name %>">
+            </div>
+            <div class="cohort_form_members">
+              <label for="members">Members</label>
+              <textarea name="members" placeholder="Jon Snow,Daenerys,Melisandre,Arya Stark" 
+                class="cohort_form_members_text"><%= cohort.members %></textarea>
+            </div>
+            <div class="cohort_form_submit">
+              <input type="submit" value="Submit" class="cohort_form_submit_btn">
+            </div>
+          </form>
+        </div>
+      </article>
+    <% } else { %>
+    <div class="no_cohort_message">
+      <h4>Sorry, cohort <%= id %> not found.</h4>
+    </div>
+    <% }; %>
+    </main>
+  </body>
 
 </html>

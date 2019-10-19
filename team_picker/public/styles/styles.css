@@ -32,7 +32,7 @@ html {
 .branding label {
   font-size: 1.3em;
   font-weight: 500;
-  color: lightblue;
+  color: lightskyblue;
 }
 
 .nav {
@@ -50,7 +50,7 @@ html {
   font-weight: 400;
   margin-left: 0.5em;
   text-decoration: none;
-  color: lightblue;
+  color: lightskyblue;
 }
 
 .menu {
@@ -116,11 +116,10 @@ html {
 }
 
 .cohort_members {
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .cohort_details button {
-  padding: 0.25em;
   margin-top: 0.5em;
 }
 
@@ -132,9 +131,9 @@ html {
 }
 
 .cohort_submit input, button {
-  padding: 0.25em;
   margin-right: 1em;
-  background-color: blue;
+  font-size: 1.1em;
+  background-color: lightskyblue;
   color: white;
 }
 
@@ -174,8 +173,9 @@ html {
 .assign_teams_submit input {
   padding: 0.25em;
   width: 100%;
+  font-size: 1.1em;
   background-color: white;
-  color: lightblue;
+  color: lightskyblue;
 }
 
 .teams {
@@ -187,17 +187,27 @@ html {
 }
 
 .teams_table th {
+  padding: 0.5em;
   font-weight: bold;
   text-align: left;
-  padding: 0.5em;
+}
+
+.teams_table th:nth-child(1) {
+  text-align: right;
 }
 
 .teams_table td {
+  padding: 0.5em;
   border-top: 1px solid lightgrey;
   text-align: left;
-  padding: 0.5em;
-  word-break: break-all;
+  word-break: break-word;
 }
+
+.teams_table td:nth-child(1) {
+  width: 2em;
+  text-align: right;
+}
+
 
 /*** Cohort form ***/
 
@@ -227,6 +237,7 @@ html {
 
 .cohort_form_submit_btn {
   width: 15%;
+  font-size: 1.1em;
   background-color: white;
-  color: lightblue;
+  color: lightskyblue;
 }
