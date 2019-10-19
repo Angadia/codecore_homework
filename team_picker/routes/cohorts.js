@@ -25,23 +25,6 @@ router.get("/new", (req, res) => {
   });
 });
 
-router.get("/:id", (req, res) => {
-  const cohortId = req.params.id;
-  
-  knex("cohorts")
-    .where("id", cohortId)
-    .first()
-    .then(cohort => {
-      res.render("cohorts/show", {
-        cohort: cohort,
-        id: req.params.id,
-        assign_method: undefined,
-        quantity: undefined,
-        teams: undefined
-      });
-    });
-});
-
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -56,11 +39,11 @@ function getRandomizedArray(membersArray) {
   return randomizedArray;
 };
 
-function generateAssignedTeams(members, assign_method, quantity) {
+function generateAssignedTeams(members, method, quantity) {
   const emptyArray = [];
   const membersRandomizedArray = getRandomizedArray(members.split(','));
   
-  if (!assign_method || !quantity) {
+  if (!method || !quantity) {
     return emptyArray;
   };
 
@@ -70,7 +53,7 @@ function generateAssignedTeams(members, assign_method, quantity) {
   };
 
   const teams = [];
-  if (assign_method == "team_count") {
+  if (method == "team_count") {
     let numTeams = numQuantity;
     let minMembersPerTeam = 1;
     if (numTeams > membersRandomizedArray.length) {
@@ -88,7 +71,7 @@ function generateAssignedTeams(members, assign_method, quantity) {
       if (membersRandomizedArray.length%numTeams == 0)
         minMembersPerTeam = membersRandomizedArray.length/numTeams;
     };
-  } else if (assign_method == "number_per_team") {
+  } else if (method == "number_per_team") {
     while (membersRandomizedArray.length > 0) {
       teams.push(membersRandomizedArray.splice(0,numQuantity).join(','));
     };
@@ -96,29 +79,44 @@ function generateAssignedTeams(members, assign_method, quantity) {
   return teams;
 };
 
-router.post("/:id", (req, res) => {
-  const id = req.body.id;
-  const members = req.body.members;
-  const name = req.body.name;
-  const assign_method = req.body.assign_method;
-  const quantity = req.body.quantity;
 
-  const teams = generateAssignedTeams(members, assign_method, quantity);
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  if (Object.entries(req.query).length <= 0) {
+    knex("cohorts")
+      .where("id", id)
+      .first()
+      .then(cohort => {
+        res.render("cohorts/show", {
+          cohort: cohort,
+          id: req.params.id,
+          method: undefined,
+          quantity: undefined,
+          teams: undefined
+        });
+      });
+  } else {
+    const members = req.query.members;
+    const name = req.query.name;
+    const method = req.query.method;
+    const quantity = req.query.quantity;
 
-  res.render("cohorts/show", {
-    cohort: {id: id, name: name, members: members},
-    assign_method: assign_method,
-    quantity: quantity,
-    teams: teams
-  });
+    const teams = generateAssignedTeams(members, method, quantity);
+
+    res.render("cohorts/show", {
+      cohort: {id: id, name: name, members: members},
+      method: method,
+      quantity: quantity,
+      teams: teams
+    });
+  };
 });
 
-
 router.get("/:id/edit", (req, res) => {
-  const cohortId = req.params.id;
+  const id = req.params.id;
   
   knex("cohorts")
-    .where("id", cohortId)
+    .where("id", id)
     .first()
     .then(cohort => {
       res.render("cohorts/edit", {
@@ -129,10 +127,10 @@ router.get("/:id/edit", (req, res) => {
 });
 
 router.patch("/:id", (req, res) => {
-  const cohortId = req.params.id;
+  const id = req.params.id;
 
   knex("cohorts")
-    .where("id", cohortId)
+    .where("id", id)
     .update({
         name: req.body.name,
         logo_url: req.body.logo_url,
@@ -143,7 +141,7 @@ router.patch("/:id", (req, res) => {
     .then(cohort => {
       res.render("cohorts/show", { 
         cohort: cohort[0],
-        assign_method: undefined,
+        method: undefined,
         quantity: undefined,
         teams: undefined
       });
@@ -151,10 +149,10 @@ router.patch("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  const cohortId = req.params.id;
+  const id = req.params.id;
 
   knex("cohorts")
-    .where("id", cohortId)
+    .where("id", id)
     .delete()
     .then(data => {
       res.redirect("/cohorts");
