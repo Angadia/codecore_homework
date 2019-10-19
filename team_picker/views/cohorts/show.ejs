@@ -33,8 +33,6 @@
       <% if (cohort.members.length > 0) { %>
         <div class="assign_teams">
           <form action="/cohorts/<%= cohort.id %>" method="GET">
-            <input type="hidden" name="name" value="<%= cohort.name %>">
-            <input type="hidden" name="members" value="<%= cohort.members %>">
             <div class="assign_teams_method">
               <label>Method</label>
               <ul class="assign_teams_method_choices">

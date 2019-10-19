@@ -82,34 +82,18 @@ function generateAssignedTeams(members, method, quantity) {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  if (Object.entries(req.query).length <= 0) {
-    knex("cohorts")
-      .where("id", id)
-      .first()
-      .then(cohort => {
-        res.render("cohorts/show", {
-          cohort: cohort,
-          id: req.params.id,
-          method: undefined,
-          quantity: undefined,
-          teams: undefined
-        });
+  knex("cohorts")
+    .where("id", id)
+    .first()
+    .then(cohort => {
+      res.render("cohorts/show", {
+        cohort: cohort,
+        id: req.params.id,
+        method: req.query.method,
+        quantity: req.query.quantity,
+        teams: generateAssignedTeams(cohort.members, req.query.method, req.query.quantity)
       });
-  } else {
-    const members = req.query.members;
-    const name = req.query.name;
-    const method = req.query.method;
-    const quantity = req.query.quantity;
-
-    const teams = generateAssignedTeams(members, method, quantity);
-
-    res.render("cohorts/show", {
-      cohort: {id: id, name: name, members: members},
-      method: method,
-      quantity: quantity,
-      teams: teams
     });
-  };
 });
 
 router.get("/:id/edit", (req, res) => {

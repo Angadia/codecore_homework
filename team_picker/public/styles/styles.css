@@ -174,8 +174,8 @@ html {
 .assign_teams_submit input {
   padding: 0.25em;
   width: 100%;
-  background-color: lightblue;
-  color: white;
+  background-color: white;
+  color: lightblue;
 }
 
 .teams {
