@@ -30,6 +30,50 @@
             <input type="submit" value="Delete cohort" class="cohort_delete_btn">
           </form>
         </div>
+      <% if (cohort.members.length > 0) { %>
+        <div class="assign_teams">
+          <form action="/cohorts/<%= cohort.id %>" method="POST">
+            <input type="hidden" name="id" value="<%= cohort.id %>">
+            <input type="hidden" name="name" value="<%= cohort.name %>">
+            <input type="hidden" name="members" value="<%= cohort.members %>">
+            <div class="assign_teams_method">
+              <label>Method</label>
+              <ul class="assign_teams_method_choices">
+                <li><input type="radio" name="assign_method" value="team_count"
+                <% if (assign_method && assign_method == "team_count") { %> checked="true"<% }; %>
+                >Team Count</li>
+                <li><input type="radio" name="assign_method" value="number_per_team"
+                <% if (assign_method && assign_method == "number_per_team") { %> checked="true"<% }; %>
+                >Number Per Team</li>
+              </ul>
+            </div>
+            <div class="assign_teams_quantity">
+              <label>Quantity</label>
+              <input type="text" name="quantity" class="assign_teams_quantity_text"
+              <% if (quantity) { %> value="<%= quantity %>"<% }; %>>
+            </div>
+            <div class="assign_teams_submit">
+              <input type="submit" value="Assign Teams" class="assign_teams_btn">
+            </div>
+          </form>
+          <% if (teams && teams.length > 0) { %>
+          <div class="teams">
+            <table class="teams_table">
+              <tr>
+                <th>#</th>
+                <th>Members</th>
+              </tr>
+              <% for (let i = 0; i < teams.length; i++) { %>
+              <tr>
+                <td><%= i+1 %></td>
+                <td><%= teams[i] %></td>
+              </tr>            
+              <% }; %>
+            </table>
+          </div>
+          <% }; %>
+        </div>
+      <% }; %>
       </cohort>
     </article>
   <% } else { %>

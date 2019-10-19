@@ -34,10 +34,29 @@ router.get("/:id", (req, res) => {
     .then(cohort => {
       res.render("cohorts/show", {
         cohort: cohort,
-        id: req.params.id
+        id: req.params.id,
+        assign_method: undefined,
+        quantity: undefined,
+        teams: ["member1,member2","member3,member4"]
       });
     });
 });
+
+router.post("/:id", (req, res) => {
+  const id = req.body.id;
+  const members = req.body.members;
+  const name = req.body.name;
+  const assign_method = req.body.assign_method;
+  const quantity = req.body.quantity;
+
+  res.render("cohorts/show", {
+    cohort: {id: id, name: name, members: members},
+    assign_method: assign_method,
+    quantity: quantity,
+    teams: ["member5,member6","member7,member8"]
+  });
+});
+
 
 router.get("/:id/edit", (req, res) => {
   const cohortId = req.params.id;
@@ -66,7 +85,11 @@ router.patch("/:id", (req, res) => {
       ['id', 'name', 'members']
     )
     .then(cohort => {
-      res.render("cohorts/show", { cohort: cohort[0] });
+      res.render("cohorts/show", { 
+        cohort: cohort[0],
+        assign_method: undefined,
+        quantity: undefined
+      });
     });
 });
 
@@ -81,11 +104,12 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.post("/new", (req, res) => {
+router.post("/", (req, res) => {
   const members = req.body.members;
   const logo_url = req.body.logo_url;
   const name = req.body.name;
 
+  console.log(name, logo_url, members);
   if (name.length > 0 || logo_url.length > 0 || members.length > 0) {
     knex("cohorts")
       .insert({
@@ -95,6 +119,7 @@ router.post("/new", (req, res) => {
       })
       .returning("*")
       .then(data => {
+        console.log("created a new cohort", data);
         res.redirect("/");
       });
   } else {
@@ -105,7 +130,5 @@ router.post("/new", (req, res) => {
     });
   };
 });
-
-
 
 module.exports = router;
