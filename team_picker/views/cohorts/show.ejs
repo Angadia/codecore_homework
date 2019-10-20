@@ -3,75 +3,78 @@
 
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width", initial-scale=1 shrink-to-fit=no>
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Super Team Picker</title>
   </head>
 
   <body>
 <%- include("../partials/header") %>
-    <main class="main">
+    <main class="main container">
     <% if (cohort) { %>
-      <article class="cohort">
-        <cohort class="cohort_details">
-          <div class="cohort_title">
-            <h4 class="cohort_name"><%= cohort.name %></h4>
-          </div>
-          <div class="cohort_content">
-            <p class="cohort_members"><%= cohort.members %></p>
-          </div>
-          <div class="cohort_submit">
-            <form action="/cohorts/<%= cohort.id %>/edit" method="GET">
-              <input type="submit" value="Edit cohort" class="cohort_edit_btn">
-            </form>
-            <form action="/cohorts/<%= cohort.id %>" method="POST">
-              <input type="hidden" name="_method" value="DELETE">
-              <input type="submit" value="Delete cohort" class="cohort_delete_btn">
-            </form>
-          </div>
-        <% if (cohort.members.length > 0) { %>
-          <div class="assign_teams">
-            <form action="/cohorts/<%= cohort.id %>" method="GET">
-              <div class="assign_teams_method">
-                <label>Method</label>
-                <ul class="assign_teams_method_choices">
-                  <li><input type="radio" name="method" value="team_count"
-                  <% if (method && method == "team_count") { %> checked="true"<% }; %>
-                  >Team Count</li>
-                  <li><input type="radio" name="method" value="number_per_team"
-                  <% if (method && method == "number_per_team") { %> checked="true"<% }; %>
-                  >Number Per Team</li>
-                </ul>
-              </div>
-              <div class="assign_teams_quantity">
-                <label>Quantity</label>
-                <input type="text" name="quantity" class="assign_teams_quantity_text"
-                <% if (quantity) { %> value="<%= quantity %>"<% }; %>>
-              </div>
-              <div class="assign_teams_submit">
-                <input type="submit" value="Assign Teams" class="assign_teams_btn">
-              </div>
-            </form>
-            <% if (teams && teams.length > 0) { %>
-            <div class="teams">
-              <table class="teams_table">
-                <tr>
-                  <th>#</th>
-                  <th>Members</th>
-                </tr>
-                <% for (let i = 0; i < teams.length; i++) { %>
-                <tr>
-                  <td><%= i+1 %></td>
-                  <td><%= teams[i] %></td>
-                </tr>            
-                <% }; %>
-              </table>
+      <article class="cohort container my-3">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title"><%= cohort.name %></h4>
+            <p class="card-text"><%= cohort.members %></p>
+            <div class="btn-group">
+              <form action="/cohorts/<%= cohort.id %>/edit" method="GET">
+                <input type="submit" value="Edit cohort" class="btn btn-primary">
+              </form>
             </div>
-            <% }; %>
+            <div class="btn-group">
+                <form action="/cohorts/<%= cohort.id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Delete cohort" class="btn btn-primary">
+              </form>
+            </div>
+          <% if (cohort.members.length > 0) { %>
+            <div class="border my-3"></div>
+            <div class="assign_teams form-group">
+              <form action="/cohorts/<%= cohort.id %>" method="GET">
+                <label>Method</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="method" id="method_team_count" value="team_count"
+                  <% if (method && method == "team_count") { %> checked="true"<% }; %>>
+                  <label class="form-check-label" for="method_team_count">Team Count</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="method" id="method_number_per_team" value="number_per_team"
+                  <% if (method && method == "number_per_team") { %> checked="true"<% }; %>>
+                  <label class="form-check-label" for="method_number_per_team">Number Per Team</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label mt-2" for="assign_teams_quantity">Quantity</label>
+                  <input type="text" class="form-control" name="quantity" id="assign_teams_quantity"
+                  <% if (quantity) { %> value="<%= quantity %>"<% }; %>>
+                </div>
+                <input type="submit" value="Assign Teams" class="btn btn-primary btn-block">
+              </form>
+              <% if (teams && teams.length > 0) { %>
+              <div class="teams">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Members</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for (let i = 0; i < teams.length; i++) { %>
+                    <tr>
+                      <th scope"row"><%= i+1 %></td>
+                      <td><%= teams[i] %></td>
+                    </tr>            
+                    <% }; %>
+                  </tbody>
+                </table>
+              </div>
+              <% }; %>
+            </div>
+          <% }; %>
           </div>
-        <% }; %>
-        </cohort>
+        </div>
       </article>
     <% } else { %>
     <div class="no_cohort_message">
@@ -79,6 +82,9 @@
     </div>
     <% }; %>
     </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 
 </html>

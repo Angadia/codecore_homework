@@ -3,47 +3,46 @@
 
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width", initial-scale=1 shrink-to-fit=no>
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="/assets/favicon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Super Team Picker</title>
   </head>
 
   <body>
 <%- include("../partials/header") %> 
-    <main class="main">
+    <main class="main container">
     <% if (cohort) { %>
-      <article class="cohort">
-        <div class="cohort_form">
-          <form action="/cohorts/<%= cohort.id %>" method="POST">
+      <article class="cohort container">
+        <form action="/cohorts/<%= cohort.id %>" method="POST">
           <input type="hidden" name="_method" value="PATCH">
-            <div class="cohort_form_logo_url">
-              <label for="logo_url">Logo Url</label>
-              <input type="text" name="logo_url" placeholder="e.g. https://www.example.com/some.png"
-                class="cohort_form_logo_url_text" value="<%= cohort.logo_url %>">
+            <div class="form-group row">
+              <label for="logoUrl">Logo URL</label>
+              <input type="url" class="form-control" id="logo_url" name="logo_url" placeholder="https://www.example.com/some.png" value="<%= cohort.logo_url %>">
             </div>
-            <div class="cohort_form_name">
-              <label for="name">Name</label>
-              <input type="text" name="name" placeholder="Flying Funks"
-                class="cohort_form_name_text" value="<%= cohort.name %>">
-            </div>
-            <div class="cohort_form_members">
+            <div class="form-group row">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Flying Funks" value="<%= cohort.name %>">
+              </div>
+            <div class="form-group row">
               <label for="members">Members</label>
-              <textarea name="members" placeholder="Jon Snow,Daenerys,Melisandre,Arya Stark" 
-                class="cohort_form_members_text"><%= cohort.members %></textarea>
+              <textarea class="form-control" id="members" name="members" rows="3" placeholder="Jon Snow,Daenerys,Melisandre,Arya Stark"><%= cohort.members %></textarea>
             </div>
-            <div class="cohort_form_submit">
-              <input type="submit" value="Submit" class="cohort_form_submit_btn">
+            <div class="form-group row justify-content-end">
+              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
         </div>
       </article>
     <% } else { %>
-    <div class="no_cohort_message">
-      <h4>Sorry, cohort <%= id %> not found.</h4>
-    </div>
+      <div class="no_cohort_message">
+        <h4>Sorry, cohort <%= id %> not found.</h4>
+      </div>
     <% }; %>
     </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 
 </html>

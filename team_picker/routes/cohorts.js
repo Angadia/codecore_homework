@@ -148,7 +148,6 @@ router.post("/", (req, res) => {
   const logo_url = req.body.logo_url;
   const name = req.body.name;
 
-  console.log(name, logo_url, members);
   if (name.length > 0 || logo_url.length > 0 || members.length > 0) {
     knex("cohorts")
       .insert({
