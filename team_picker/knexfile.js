@@ -6,7 +6,7 @@ module.exports = {
     client: 'pg',
     connection: {
       database: 'Super_Team_Picker',
-      user:     'jigs',
+      user:     "jignesh",
       password: 'supersecret'
     },
     migrations: {
