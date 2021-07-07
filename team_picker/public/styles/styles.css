@@ -1,0 +1,243 @@
+@import url("reset.css");
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+/*** header and navigation menu ***/
+
+.header {
+  display: flex;
+  flex-direction: row;
+}
+
+.branding {
+  width: 40%;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.branding label {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: lightskyblue;
+}
+
+.nav {
+  width: 60%;
+  padding: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.menu a {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-left: 0.5em;
+  text-decoration: none;
+  color: lightskyblue;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+/*** Cohorts all around ***/
+
+.main {
+  padding: 0.5em;
+}
+
+.no_cohort_message {
+  padding: 0.5em;
+}
+
+.cohorts {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cohort {
+  padding: 0.5em;
+}
+
+.cohort_details {
+  padding: 1em;
+  border: 1px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cohort_title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.cohort_name {
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+.cohort_logo_url {
+  max-width: 24px;
+  max-height: 24px;
+  margin-right: 0.5em;
+}
+
+.cohort_content {
+  width: 100%;
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.cohort_members {
+  word-break: break-word;
+}
+
+.cohort_details button {
+  margin-top: 0.5em;
+}
+
+.cohort_submit {
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.cohort_submit input, button {
+  margin-right: 1em;
+  font-size: 1.1em;
+  background-color: lightskyblue;
+  color: white;
+}
+
+.assign_teams {
+  margin-top: 1em;
+  border-top: 1px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.assign_teams_method {
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.assign_teams_quantity {
+  width: 100%;
+  padding-top: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.assign_teams_quantity_text {
+  margin-top: 0.5em;
+}
+
+.assign_teams_submit {
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.assign_teams_submit input {
+  padding: 0.25em;
+  width: 100%;
+  font-size: 1.1em;
+  background-color: white;
+  color: lightskyblue;
+}
+
+.teams {
+  padding: 0.5em;
+}
+
+.teams_table {
+  width: 100%;
+}
+
+.teams_table th {
+  padding: 0.5em;
+  font-weight: bold;
+  text-align: left;
+}
+
+.teams_table th:nth-child(1) {
+  text-align: right;
+}
+
+.teams_table td {
+  padding: 0.5em;
+  border-top: 1px solid lightgrey;
+  text-align: left;
+  word-break: break-word;
+}
+
+.teams_table td:nth-child(1) {
+  width: 2em;
+  text-align: right;
+}
+
+
+/*** Cohort form ***/
+
+.cohort_form {
+  width: 100%;
+  padding: 0.5em;
+}
+
+.cohort_form_logo_url_text,
+.cohort_form_name_text,
+.cohort_form_members_text {
+  width: 100%;
+  margin-top: 0.5em;
+}
+
+.cohort_form_name,
+.cohort_form_members {
+  padding-top: 0.5em;
+}
+
+.cohort_form_submit {
+  padding-top: 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.cohort_form_submit_btn {
+  width: 15%;
+  font-size: 1.1em;
+  background-color: white;
+  color: lightskyblue;
+}
